@@ -68,4 +68,11 @@ Usage
 
   The default browser will be opened to display the graph rendered by
   `TensorBoard <https://www.tensorflow.org/guide/graph_viz>`__.
+  Please refresh the browser if it cannot connect to
+  http://localhost:6006, because starting TensorBoard may take time.
 
+* To print a textual summary of the model::
+
+    $ ml print object-recognition            # Show only a short summary of the model
+    $ ml print object-recognition --verbose  # Show a long list of layers of the model
+    $ ml print object-recognition -n 10      # Show only the first or last 10 layers
