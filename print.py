@@ -30,6 +30,12 @@ model = ResNet152(weights='imagenet')
 # Print model summary
 
 class PrintFn():
+    """A print function customized to keras.utils.print_summary().
+
+    See (https://keras.io/utils/#print_summary) and
+(https://github.com/keras-team/keras/blob/master/keras/utils/layer_utils.py)
+
+    """
 
     def __init__(self, verbose=False, nlayer_display=NLAYER_DISPLAY):
         self.nlayer = 0             # Number of layers
