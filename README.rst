@@ -2,36 +2,20 @@
 Object Recognition
 ==================
 
-This model is based on the `deep learning kubernetes
-tutorial <https://blogs.technet.microsoft.com/machinelearning/2018/04/19/deploying-deep-learning-models-on-kubernetes-with-gpus/>`__
-by Mathew Salvaris and Fidan Boylu Uz of Microsoft. The code comes from
-their `github
-repository <https://github.com/Microsoft/AKSDeploymentTutorial>`__
-containing a number of tutorials in Jupyter notebooks that have
-step-by-step instructions on how to deploy a pretrained deep learning
-model on a GPU enabled Kubernetes cluster.
-
-The pre-trained `ResNet152
+This package, based on the `deep learning kubernetes tutorial
+<https://blogs.technet.microsoft.com/machinelearning/2018/04/19/deploying-deep-learning-models-on-kubernetes-with-gpus/>`__
+by Mathew Salvaris and Fidan Boylu Uz of Microsoft, demonstrates a
+pre-trained `ResNet152
 <https://www.tensorflow.org/hub/modules/google/imagenet/resnet_v1_152/classification/1>`__
-model is used. Sample images are provided, pre-processed to the
-required format and classified using the model.  It can be used to
-recognise `1000 different kinds of classes
-<http://data.dmlc.ml/mxnet/models/imagenet/synset.txt>`__.  To name a few::
+model to identify the main object of a photo. Sample images are
+provided within the package and the demonstration applies the
+pre-built model to each image. This pre-built model has been trained
+to recognise `1000 different kinds of classes/objects
+<http://data.dmlc.ml/mxnet/models/imagenet/synset.txt>`__.  These
+include goldfish, great white shark, tiger shark, sports car, etc.
 
-  n01440764 tench, Tinca tinca
-  n01443537 goldfish, Carassius auratus
-  n01484850 great white shark, white shark, man-eater, man-eating shark, Carcharodon carcharias
-  n01491361 tiger shark, Galeocerdo cuvieri
-  n01494475 hammerhead, hammerhead shark
-  n01496331 electric ray, crampfish, numbfish, torpedo
-  n01498041 stingray
-  n01514668 cock
-  n01514859 hen
-  n01518878 ostrich, Struthio camelus
-
-Visit the `github repository
-<https://Github.com/mlhubber/mlmodels/tree/master/object-recognition>`_  for
-the sample code.
+Visit the github repository for the sample code.
+https://Github.com/mlhubber/objects
 
 -----
 Usage
