@@ -17,8 +17,6 @@ args = parser.parse_args()
 # Load required modules
 
 print("Loading the required Python modules for the ResNet152 model ...")
-import tensorflow as tf
-import keras
 from objreg_utils import ResNet152
 
 # Load model
@@ -29,7 +27,7 @@ model = ResNet152(weights='imagenet')
 
 # Print model summary
 
-class PrintFn():
+class PrintFn:
     """A print function customized to keras.utils.print_summary().
 
     See (https://keras.io/utils/#print_summary) and
@@ -48,11 +46,9 @@ class PrintFn():
         self.summary = []           # All lines from Keras model.summary()
         self.layer_index = []       # Indexes of all layers
 
-
     def __mark_layer(self):
         self.nlayer += 1
         self.layer_index.append(len(self.summary)-1)
-
 
     def __call__(self, line):
         self.summary.append(line)
@@ -81,9 +77,9 @@ class PrintFn():
                 head = self.layer_index[self.nlayer_display] + 1
                 tail = self.layer_index[self.nlayer - self.nlayer_display]
 
-                print("\n".join(self.summary[ : head]))
+                print("\n".join(self.summary[:head]))
                 print("\n    ...\n" * 2)
-                print("\n".join(self.summary[tail : ]))
+                print("\n".join(self.summary[tail:]))
 
 
 model.summary(print_fn=PrintFn(verbose=args.verbose, nlayer_display=args.nlayer_display))

@@ -3,9 +3,7 @@
 print("Loading the required Python modules for the ResNet152 model.")
 
 from objreg_utils import (
-    to_img,
     img_url_to_json,
-    plot_predictions,
     plot_single_prediction,
     get_model_api,
     tab_complete_path,
