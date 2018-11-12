@@ -1,11 +1,6 @@
 #!/bin/sh
 
-# 20180616 tested on Ubuntu 18.04 (Azure)
-
 model="$(python -c "from mlhub import utils; print(utils.get_package_name())")"
-cache_dir="$(python -c "from mlhub import utils; print(utils.create_package_cache_dir())")"
-ln -s ${cache_dir} cache
-cache_dir="cache"
 
 checkpoint_url='http://download.tensorflow.org/models/resnet_v1_152_2016_08_28.tar.gz'
 checkpoint_tar="$(basename ${checkpoint_url})"
@@ -32,8 +27,19 @@ img_url=(\
   'http://i.telegraph.co.uk/multimedia/archive/03233/BIRDS-ROBIN_3233998b.jpg' \
 )
 
-cd ${cache_dir}
+######################################################################
+# Setup
 
+# Call mlhub.utils.create_package_cache_dir to get the package-specific cache dir.
+# Then link it into ./cache
+
+cache_dir="$(python -c "from mlhub import utils; print(utils.create_package_cache_dir())")"
+ln -s ${cache_dir} cache
+cache_dir="cache"
+
+# Change dir to ./cache to make following work inside ./cache
+
+cd ${cache_dir}
 
 ######################################################################
 # Dependencies
