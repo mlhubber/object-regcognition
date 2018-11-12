@@ -1,6 +1,6 @@
 print("Loading the required Python modules for the ResNet152 model ...")
 from objreg_utils import (
-    _save_tf_modeo_graph,
+    _save_tf_model_graph,
     _MODEL_FILE,
 )
 import shutil
@@ -9,7 +9,7 @@ import signal
 import time
 
 print("\nLoading the pre-trained ResNet v1 152 model ...")
-logdir = _save_tf_modeo_graph(_MODEL_FILE)
+logdir = _save_tf_model_graph(_MODEL_FILE)
 
 
 # Run TensorBoard for visualization

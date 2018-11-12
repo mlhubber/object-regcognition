@@ -36,6 +36,7 @@ from keras import initializers
 from keras.engine import Layer, InputSpec
 import sys
 from packaging import version
+import mlhub
 
 if version.parse(sys.modules['keras'].__version__) > version.parse('2.2.0'):
     from keras_applications.imagenet_utils import _obtain_input_shape
@@ -48,8 +49,11 @@ sys.setrecursionlimit(3000)
 # Model functions
 # ----------------------------------------------------------------------
 
-_MODEL_FILE = os.getenv('MODEL_FILE', "resources/resnet_v1_152.ckpt")
-_LABEL_FILE = os.getenv('LABEL_FILE', "resources/synset.txt")
+_CACHE_DIR = mlhub.utils.create_package_cache_dir()
+# _MODEL_FILE = os.getenv('MODEL_FILE', os.path.join(_CACHE_DIR, "resources", "resnet_v1_152.ckpt"))
+# _LABEL_FILE = os.getenv('LABEL_FILE', os.path.join(_CACHE_DIR, "resources", "synset.txt"))
+_MODEL_FILE = os.getenv('MODEL_FILE', os.path.join("cache", "resources", "resnet_v1_152.ckpt"))
+_LABEL_FILE = os.getenv('LABEL_FILE', os.path.join("cache", "resources", "synset.txt"))
 _NUMBER_RESULTS = 3
 
 
@@ -614,7 +618,7 @@ def ResNet152(include_top=True, weights=None,
     return model
 
 
-def _save_tf_modeo_graph(checkpoint_file):
+def _save_tf_model_graph(checkpoint_file):
     sess, _, _, _ = _load_tf_model(checkpoint_file)
     logdir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "tf_logs")
     file_writer = tf.summary.FileWriter(logdir, sess.graph)

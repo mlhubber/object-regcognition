@@ -12,9 +12,14 @@ from objreg_utils import (
 import glob
 import json
 import os
+import mlhub
 
-folder = os.path.dirname(os.path.realpath(__file__))
-images = glob.glob("images/*.jpg")
+# cache_dir = mlhub.utils.get_package_cache_dir()
+# folder = os.path.join(cache_dir, "images")
+# images = glob.glob(os.path.join(folder, "*.jpg"))
+
+folder = mlhub.utils.get_package_dir()
+images = glob.glob(os.path.join("cache", "images", "*.jpg"))
 images.sort()
 
 print("\nThe ResNet152 model will be used for recognizing the images in\n'{}'".format(folder))

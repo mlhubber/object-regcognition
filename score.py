@@ -16,9 +16,10 @@ import json
 import os
 import sys
 import readline
+from mlhub import utils as mlutils
 
 # The working dir of the command which invokes this script.
-CMD_CWD = os.environ.get('CMD_CWD', '')
+CMD_CWD = mlutils.get_cmd_cwd()
 
 # Utilities
 
