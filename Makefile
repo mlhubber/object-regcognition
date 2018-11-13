@@ -14,8 +14,6 @@ MODEL_FILES = 			\
 	score.py                \
 	README.txt		\
 	DESCRIPTION.yaml	\
-	images			\
-	resources		\
 	objreg_utils.py         \
 
 include ../git.mk
