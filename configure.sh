@@ -64,14 +64,19 @@ pushd ${dr} 1>/dev/null
 
 if [[ ! -f "${checkpoint_file}" ]]; then
   echo "Download the model checkpoint ..."
-  wget ${checkpoint_url}
+
+  # --quiet makes wget won't show all verbose detail about downloading
+  # --show-progress makes wget only show the progress of downloading
+  # 2>&1 makes all the messages from wget show up, since those messages are directed to stderr,
+  #      which won't be shown if this script is invoked by subprocess.Popen(..., stderr=PIPE)
+  wget --quiet --show-progress ${checkpoint_url} 2>&1
   tar xvf ${checkpoint_tar} 1>/dev/null
   rm ${checkpoint_tar}
 fi
 
 if [[ ! -f "${label_file}" ]]; then
   echo "Download the synset for the model to translate model output to a specific label ..."
-  wget ${label_url}
+  wget --quiet --show-progress ${label_url} 2>&1
 fi
 
 popd 1>/dev/null
@@ -93,7 +98,7 @@ do
   img=${img_name[${i}]}
   if [[ ! -f ${img} ]]; then
     echo "... ${img}"
-    wget -O ${img} ${img_url[${i}]}
+    wget  --quiet --show-progress -O ${img} ${img_url[${i}]} 2>&1
   fi
 done
 
