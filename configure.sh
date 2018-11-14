@@ -59,7 +59,7 @@ fi
 pushd ${dr} 1>/dev/null
 
 if [[ ! -f "${checkpoint_file}" ]]; then
-  echo "Download the model checkpoint ..."
+  echo -e "\nDownload the model checkpoint ..."
 
   # --quiet makes wget won't show all verbose detail about downloading
   # --show-progress makes wget only show the progress of downloading
@@ -71,7 +71,7 @@ if [[ ! -f "${checkpoint_file}" ]]; then
 fi
 
 if [[ ! -f "${label_file}" ]]; then
-  echo "Download the synset for the model to translate model output to a specific label ..."
+  echo -e "\nDownload the synset for the model to translate model output to a specific label ..."
   wget --quiet --show-progress ${label_url} 2>&1
 fi
 
@@ -83,7 +83,7 @@ popd 1>/dev/null
 
 dr="images"
 if [[ ! -d ${dr} ]]; then
-  echo "Obtain ${dr} ..."
+  echo -e "\nObtain ${dr} ..."
   mkdir ${dr}
 fi
 
@@ -93,7 +93,6 @@ for ((i=0; i<${#img_name[*]}; i++))
 do
   img=${img_name[${i}]}
   if [[ ! -f ${img} ]]; then
-    echo "... ${img}"
     wget  --quiet --show-progress -O ${img} ${img_url[${i}]} 2>&1
   fi
 done
