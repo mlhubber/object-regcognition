@@ -16,6 +16,7 @@ import sys
 import readline
 import urllib
 from mlhub import utils as mlutils
+import socket
 
 # The working dir of the command which invokes this script.
 CMD_CWD = mlutils.get_cmd_cwd()
@@ -32,11 +33,8 @@ def _score_for_one_img(img, label='image'):
 
     try:
         jsonimg = img_url_to_json(img, label=label)
-    except urllib.error.HTTPError:
-        print("URL invalid:\n  {}".format(url))
-        return
-    except FileNotFoundError:
-        print("File not Found:\n  {}".format(url))
+    except (urllib.error.URLError, socket.gaierror, FileNotFoundError, OSError):
+        print("URL or file invalid:\n  {}".format(url))
         return
 
     json_lod = json.loads(jsonimg)
