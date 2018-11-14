@@ -3,13 +3,13 @@ meta:
   name         : objects
   title        : Recognise objects in an image using resnet152.
   languages    : py
-  version      : 1.4.0
+  version      : 1.4.1
   keywords     : image classification, python3, computer vision, imagenet, resnet, dnn, prediction, classification
   license      : gpl3
   title        : Image object recognition using resnet152.
   display      : demo, score, display
   author       : Graham.Williams@togaware.com
-  filename     : pool/main/o/objects/objects_1.4.0.mlm
+  filename     : pool/main/o/objects/objects_1.4.1.mlm
 commands:
   demo    : Run the model on sample images.
   print   : View a textual representation of the model.
