@@ -58,8 +58,11 @@ _NUMBER_RESULTS = 3
 
 
 def _create_label_lookup(label_path):
-    with open(label_path, 'r') as f:
-        label_list = [l.rstrip() for l in f]
+    try:
+        with open(label_path, 'r') as f:
+            label_list = [l.rstrip() for l in f]
+    except FileNotFoundError:
+        raise mlhub.utils.DataResourceNotFoundException(label_path)
 
     def _label_lookup(*label_locks):
         return [label_list[l] for l in label_locks]
@@ -79,7 +82,11 @@ def _load_tf_model(checkpoint_file):
     probabilities = tf.nn.softmax(logits)
 
     saver = tf.train.Saver()
-    saver.restore(sess, checkpoint_file)
+    try:
+        saver.restore(sess, checkpoint_file)
+    except ValueError:
+        raise mlhub.utils.DataResourceNotFoundException(checkpoint_file)
+
     return sess, logits, probabilities, input_tensor
 
 
@@ -322,10 +329,6 @@ def tab_complete_path(text, state):
 Adaptation of code from flyyufelix, mvoelk, BigMoyan, fchollet at https://github.com/adamcasson/resnet152
 
 """
-
-WEIGHTS_PATH = 'https://github.com/adamcasson/resnet152/releases/download/v0.1/resnet152_weights_tf.h5'
-WEIGHTS_PATH_NO_TOP = 'https://github.com/adamcasson/resnet152/releases/download/v0.1/resnet152_weights_tf_notop.h5'
-
 
 class Scale(Layer):
     """Custom Layer for ResNet used for BatchNormalization.
