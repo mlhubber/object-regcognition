@@ -45,11 +45,7 @@ cd ${cache_dir}
 # Dependencies
 
 echo "Install dependencies required by '${model}' ..."
-sudo apt-get install python3-pil
-pip3 install ipython
-pip3 install matplotlib
-pip3 install tensorflow
-pip3 install keras
+conda install pillow ipython matplotlib tensorflow keras
 
 ######################################################################
 # Resouces
