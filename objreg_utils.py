@@ -110,7 +110,7 @@ def _base64img_to_numpy(base64_img_string):
 
 
 def create_scoring_func(model_path=_MODEL_FILE, label_path=_LABEL_FILE):
-    print("\nLoading the pre-trained ResNet v1 152 model with 1000 classes.")
+    print("\nLoading the pre-trained ResNet v1 152 model with 1000 classes ...")
     start = t.default_timer()
     labels_for = _create_label_lookup(label_path)
     predict_for = _get_tf_model(model_path)
@@ -136,7 +136,7 @@ def get_model_api():
 
         results = {}
         for key, base64_img_string in images_dict.items():
-            print("\nRecognizing the image\n'{}'".format(key))
+            print("\nRecognizing the image\n'{}' ...".format(key))
             rgb_image = _base64img_to_numpy(base64_img_string)
             batch_image = np.expand_dims(rgb_image, 0)
             results[key] = scoring_func(batch_image, number_results=_NUMBER_RESULTS)
