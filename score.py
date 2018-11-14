@@ -14,6 +14,7 @@ import json
 import os
 import sys
 import readline
+import urllib
 from mlhub import utils as mlutils
 
 # The working dir of the command which invokes this script.
@@ -29,7 +30,15 @@ def _score_for_one_img(img, label='image'):
         img (str): a url to an image, or a path to an image.
     """
 
-    jsonimg = img_url_to_json(img, label=label)
+    try:
+        jsonimg = img_url_to_json(img, label=label)
+    except urllib.error.HTTPError:
+        print("URL invalid:\n  {}".format(url))
+        return
+    except FileNotFoundError:
+        print("File not Found:\n  {}".format(url))
+        return
+
     json_lod = json.loads(jsonimg)
     output = predict_for(json_lod)
     plot_single_prediction(img, output)
