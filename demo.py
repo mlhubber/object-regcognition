@@ -12,23 +12,24 @@ import glob
 import json
 import os
 import mlhub
-import sys
 
-# cache_dir = mlhub.utils.get_package_cache_dir()
-# folder = os.path.join(cache_dir, "images")
-# images = glob.glob(os.path.join(folder, "*.jpg"))
+
+# Load model
+
+predict_for = get_model_api()
+
+
+# Get the images
 
 folder = mlhub.utils.get_package_dir()
 images = glob.glob(os.path.join("cache", "images", "*.jpg"))
 images.sort()
 
 print("\nThe ResNet152 model will be used for recognizing the images in\n'{}'".format(folder))
+print("\nPlease close each image (Ctrl-w) to proceed through the demonstration.")
 
 results = []
 
-# Load model
-
-predict_for = get_model_api()
 
 # Predict
 
@@ -40,12 +41,12 @@ for image in images:
     # Plot the result
 
     plot_single_prediction(image, output)
-    print("\nPress Enter to continue on to the next image (Quit by Ctrl-d): ", end='')
-    try:
-        answer = input()
-    except EOFError:
-        print()
-        sys.exit(0)
+    # print("\nPress Enter to continue on to the next image (Quit by Ctrl-d): ", end='')
+    # try:
+    #     answer = input()
+    # except EOFError:
+    #     print()
+    #     sys.exit(0)
 
     results += [output, ]
 
