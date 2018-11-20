@@ -86,7 +86,7 @@ readline.set_completer(tab_complete_path)
 
 if len(sys.argv) < 2:
     try:
-        url = input('\nPath or URL of images to recognize (Quit by Ctrl-d):\n> ')
+        url = input("\nPath or URL of images to recognize (Quit by Ctrl-d):\n(You could try images in '~/.mlhub/objects/cache/images/')\n> ")
     except EOFError:
         print()
         sys.exit(0)
