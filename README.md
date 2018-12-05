@@ -21,10 +21,10 @@ Usage
 
 -   To install and run the pre-built model:
 
-        $ pip install mlhub
-        $ ml install objects
+        $ pip3 install mlhub
+        $ ml install   objects
         $ ml configure objects
-        $ ml demo objects
+        $ ml demo      objects
 
 -   To classify:
     -   An image from a local file:
