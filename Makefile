@@ -4,26 +4,21 @@
 #
 ########################################################################
 
-# List the files to be included in the .mlm package.
+INC_BASE    = $(HOME)/.local/share/make
+INC_PANDOC  = $(INC_BASE)/pandoc.mk
+INC_GIT     = $(INC_BASE)/git.mk
+INC_MLHUB   = $(INC_BASE)/mlhub.mk
+INC_CLEAN   = $(INC_BASE)/clean.mk
 
-MODEL_FILES = 			\
-	configure.sh		\
-	demo.py 		\
-	print.py		\
-	display.py		\
-	score.py                \
-	README.txt		\
-	DESCRIPTION.yaml	\
-	objreg_utils.py         \
-
-include ../git.mk
-include ../pandoc.mk
-include ../clean.mk
-include ../mlhub.mk
-
-clean::
-	rm -rf README.txt output
-
-realclean:: clean
-	rm -rf $(MODEL)_*.mlm
-
+ifneq ("$(wildcard $(INC_PANDOC))","")
+  include $(INC_PANDOC)
+endif
+ifneq ("$(wildcard $(INC_GIT))","")
+  include $(INC_GIT)
+endif
+ifneq ("$(wildcard $(INC_MLHUB))","")
+  include $(INC_MLHUB)
+endif
+ifneq ("$(wildcard $(INC_CLEAN))","")
+  include $(INC_CLEAN)
+endif
