@@ -3,7 +3,7 @@ meta:
   name         : objects
   title        : Recognise objects in an image using resnet152.
   languages    : py
-  version      : 1.4.3
+  version      : 1.4.4
   keywords     : image classification, python3, computer vision, imagenet, resnet, dnn, prediction, classification
   license      : gpl3
   title        : Image object recognition using resnet152.
@@ -12,7 +12,7 @@ meta:
   url          : https://github.com/mlhubber/objects
 dependencies:
   python3: packaging, ipython, toolz, matplotlib, keras
-  pip3: pillow, tensorflow
+  pip3: pillow, tensorflow, numpy==1.13.3
   files:
     - http://download.tensorflow.org/models/resnet_v1_152_2016_08_28.tar.gz: cache/resources/
     - http://data.dmlc.ml/mxnet/models/imagenet/synset.txt: cache/resources/
