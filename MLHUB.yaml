@@ -6,7 +6,7 @@ meta:
   version      : 1.4.11
   keywords     : image classification, python3, computer vision, imagenet, resnet, dnn, prediction, classification
   license      : gpl3
-  display      : demo, score, display
+  display      : demo, apply
   author       : Graham.Williams@togaware.com
   url          : https://github.com/mlhubber/objects
 dependencies:
@@ -30,15 +30,11 @@ dependencies:
     - https://cdn.arstechnica.net/wp-content/uploads/2012/04/bohol_tarsier_wiki-4f88309-intro.jpg: cache/images/tarsier.jpg
     - http://i.telegraph.co.uk/multimedia/archive/03233/BIRDS-ROBIN_3233998b.jpg: cache/images/robin.jpg
     - demo.py
-    - display.py
     - objreg_utils.py
-    - print.py
     - README.md
     - apply.py
 commands:
   demo    : Run the model on sample images.
-  print   : View a textual representation of the model.
-  display : Visualize the model graph in a browser.
   apply   :
     description: Apply the model to provided images.
     required:
