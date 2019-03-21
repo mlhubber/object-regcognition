@@ -1,17 +1,19 @@
 Object Recognition
 ==================
 
-This package, based on the [deep learning kubernetes
+This package, based on a [deep learning kubernetes
 tutorial](https://blogs.technet.microsoft.com/machinelearning/2018/04/19/deploying-deep-learning-models-on-kubernetes-with-gpus/)
-by Mathew Salvaris and Fidan Boylu Uz of Microsoft, demonstrates a
-pre-trained
-[ResNet152](https://www.tensorflow.org/hub/modules/google/imagenet/resnet_v1_152/classification/1)
-model to identify the main object of a photo. Sample images are provided
-within the package and the demonstration applies the pre-built model to
-each image. This pre-built model has been trained to recognise [1000
-different kinds of
+by Mathew Salvaris and Fidan Boylu Uz of Microsoft, demonstrates the
+pre-built
+[ResNet152](https://tfhub.dev/google/imagenet/resnet_v1_152/classification/1)
+model using TensorFlow and available from [tfhub](https://tfhub.dev)
+to identify the main object of a photo. Sample images are provided
+within the package and the demonstration applies the pre-built model
+to each image. This pre-built model has been trained to recognise
+[1000 different kinds of
 classes/objects](http://data.dmlc.ml/mxnet/models/imagenet/synset.txt).
-These include goldfish, great white shark, tiger shark, sports car, etc.
+These include goldfish, great white shark, tiger shark, sports car,
+etc.
 
 Visit the github repository for the sample code.
 <https://Github.com/mlhubber/objects>
