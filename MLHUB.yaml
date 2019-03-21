@@ -3,20 +3,23 @@ meta:
   name         : objects
   title        : Recognise objects in an image using resnet152.
   languages    : py
-  version      : 1.4.8
+  version      : 1.4.7
   keywords     : image classification, python3, computer vision, imagenet, resnet, dnn, prediction, classification
   license      : gpl3
   display      : demo, score, display
   author       : Graham.Williams@togaware.com
   url          : https://github.com/mlhubber/objects
 dependencies:
-  python3: packaging, matplotlib, keras
+  python3:
+    - packaging
+    - matplotlib
   pip3:
     - pillow
     - tensorflow
     - numpy==1.13.3
     - ipython # python3-ipython not available Ubuntu 16.04
     - toolz # python3-toolz not available Ubuntu 16.04
+    - keras # python3-keras not available Ubuntu 16.04
   files:
     - http://download.tensorflow.org/models/resnet_v1_152_2016_08_28.tar.gz: cache/resources/
     - http://data.dmlc.ml/mxnet/models/imagenet/synset.txt: cache/resources/
