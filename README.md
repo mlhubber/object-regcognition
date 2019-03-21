@@ -15,7 +15,7 @@ classes/objects](http://data.dmlc.ml/mxnet/models/imagenet/synset.txt).
 These include goldfish, great white shark, tiger shark, sports car,
 etc.
 
-Visit the github repository for the sample code.
+Visit the github repository for the actual code:
 <https://Github.com/mlhubber/objects>
 
 Usage
@@ -25,6 +25,7 @@ Usage
 
         $ pip3 install mlhub
         $ ml install   objects
+        $ ml readme    objects
         $ ml configure objects
         $ ml demo      objects
 
