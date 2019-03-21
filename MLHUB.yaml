@@ -10,8 +10,8 @@ meta:
   author       : Graham.Williams@togaware.com
   url          : https://github.com/mlhubber/objects
 dependencies:
-  python3: packaging, ipython, toolz, matplotlib, keras
-  pip3: pillow, tensorflow, numpy==1.13.3
+  python3: packaging, toolz, matplotlib, keras
+  pip3: pillow, tensorflow, numpy==1.13.3, ipython # python3-ipython not available Ubuntu 16.04
   files:
     - http://download.tensorflow.org/models/resnet_v1_152_2016_08_28.tar.gz: cache/resources/
     - http://data.dmlc.ml/mxnet/models/imagenet/synset.txt: cache/resources/
