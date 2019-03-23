@@ -22,7 +22,8 @@ dependencies:
     - numpy==1.13.3
   files:
     - http://download.tensorflow.org/models/resnet_v1_152_2016_08_28.tar.gz: cache/resources/
-    - http://data.dmlc.ml/mxnet/models/imagenet/synset.txt: cache/resources/
+    - http://mlhub.ai/cache/data.dmlc.ml/mxnet/models/imagenet/synset.txt: cache/resources/
+      # Gone missing 20190324 http://data.dmlc.ml/mxnet/models/imagenet/synset.txt: cache/resources/
     - https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Lynx_lynx_poing.jpg/220px-Lynx_lynx_poing.jpg: cache/images/lynx.jpg
     - https://upload.wikimedia.org/wikipedia/commons/3/3a/Roadster_2.5_windmills_trimmed.jpg: cache/images/sportscar.jpg
     - http://www.worldshipsociety.org/wp-content/themes/construct/lib/scripts/timthumb/thumb.php?src=http://www.worldshipsociety.org/wp-content/uploads/2013/04/stock-photo-5495905-cruise-ship.jpg&w=570&h=370&zc=1&q=100: cache/images/ship.jpg
