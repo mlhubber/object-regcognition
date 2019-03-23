@@ -13,13 +13,13 @@ dependencies:
   python3:
     - packaging
     - matplotlib
+    - ipython # python3-ipython not available Ubuntu 16.04
+    - toolz # python3-toolz not available Ubuntu 16.04
+    - keras # python3-keras not available Ubuntu 16.04
   pip3:
     - pillow
     - tensorflow
     - numpy==1.13.3
-    - ipython # python3-ipython not available Ubuntu 16.04
-    - toolz # python3-toolz not available Ubuntu 16.04
-    - keras # python3-keras not available Ubuntu 16.04
   files:
     - http://download.tensorflow.org/models/resnet_v1_152_2016_08_28.tar.gz: cache/resources/
     - http://data.dmlc.ml/mxnet/models/imagenet/synset.txt: cache/resources/
