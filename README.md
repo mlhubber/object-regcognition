@@ -32,20 +32,20 @@ Usage
 -   To classify:
     -   An image from a local file:
 
-            $ ml apply objects ~/.mlhub/objects/images/lynx.jpg
+            $ ml identify objects ~/.mlhub/objects/images/lynx.jpg
 
     -   Images in a folder:
 
-            $ ml apply objects ~/.mlhub/objects/images/
+            $ ml identify objects ~/.mlhub/objects/images/
 
     -   An image from the web (See
         <https://en.wikipedia.org/wiki/Aciagrion_occidentale>) :
 
-            $ ml apply objects https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Aciagrion_occidentale-Kadavoor-2017-05-08-002.jpg/440px-Aciagrion_occidentale-Kadavoor-2017-05-08-002.jpg
+            $ ml identify objects https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Aciagrion_occidentale-Kadavoor-2017-05-08-002.jpg/440px-Aciagrion_occidentale-Kadavoor-2017-05-08-002.jpg
 
     -   Interatively without repeatedly reloading the model:
 
-            $ ml apply objects
+            $ ml identify objects
 
 -   To visualise the network graph of the model:
 

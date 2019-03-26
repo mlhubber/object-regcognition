@@ -6,7 +6,7 @@ meta:
   version      : 1.5.4
   keywords     : image classification, python3, computer vision, imagenet, resnet, dnn, prediction, classification
   license      : gpl3
-  display      : demo, apply
+  display      : demo, identify
   author       : Graham.Williams@togaware.com
   url          : https://github.com/mlhubber/objects
 dependencies:
@@ -33,10 +33,10 @@ dependencies:
     - demo.py
     - objreg_utils.py
     - README.md
-    - apply.py
+    - identify.py
 commands:
-  demo    : Run the model on sample images.
-  apply   :
-    description: Apply the model to provided images.
+  demo     : Run the model on sample images.
+  identify :
+    description: Identify objects in supplied images.
     required:
       image: Path or URL to images.
