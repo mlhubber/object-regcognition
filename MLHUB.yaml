@@ -27,7 +27,7 @@ dependencies:
     - https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Lynx_lynx_poing.jpg/220px-Lynx_lynx_poing.jpg: cache/images/lynx.jpg
     - https://upload.wikimedia.org/wikipedia/commons/3/3a/Roadster_2.5_windmills_trimmed.jpg: cache/images/sportscar.jpg
     - http://www.worldshipsociety.org/wp-content/themes/construct/lib/scripts/timthumb/thumb.php?src=http://www.worldshipsociety.org/wp-content/uploads/2013/04/stock-photo-5495905-cruise-ship.jpg&w=570&h=370&zc=1&q=100: cache/images/ship.jpg
-    - http://yourshot.nationalgeographic.com/u/ss/fQYSUbVfts-T7pS2VP2wnKyN8wxywmXtY0-FwsgxpiZv_E9ZfPsNV5B0ER8-bOdruvNfMD5EbP4SznWz4PYn/: cache/images/croc.jpg
+    - https://upload.wikimedia.org/wikipedia/commons/3/35/Saltwater_crocodile.jpg: cache/images/croc.jpg
     - https://cdn.arstechnica.net/wp-content/uploads/2012/04/bohol_tarsier_wiki-4f88309-intro.jpg: cache/images/tarsier.jpg
     - http://i.telegraph.co.uk/multimedia/archive/03233/BIRDS-ROBIN_3233998b.jpg: cache/images/robin.jpg
     - demo.py
