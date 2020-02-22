@@ -3,7 +3,7 @@ meta:
   name         : objects
   title        : Recognise objects in an image using resnet152.
   languages    : py
-  version      : 1.5.8
+  version      : 1.5.9
   keywords     : image classification, python3, computer vision, imagenet, resnet, dnn, prediction, classification
   license      : gpl3
   display      : demo, identify
