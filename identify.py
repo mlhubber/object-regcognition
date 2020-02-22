@@ -1,6 +1,6 @@
 # Import required libraries.
 
-print("Loading the required Python modules for the ResNet152 model ...")
+print("Loading the required Python modules for the ResNet152 model ...\n")
 
 from objreg_utils import (
     img_url_to_json,
