@@ -17,7 +17,7 @@ These include goldfish, great white shark, tiger shark, sports car,
 etc.
 
 Visit the github repository for the examples and code:
-<https://Github.com/mlhubber/objects>
+<https://github.com/mlhubber/objects>
 
 Usage
 -----
