@@ -17,6 +17,11 @@ import random
 import re
 import glob
 
+# Remove all logging information of tensorflow from the output.
+import logging
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # FATAL
+logging.getLogger('tensorflow').setLevel(logging.FATAL)
+
 from keras.layers import Input
 from keras.layers import Dense
 from keras.layers import Activation
@@ -72,10 +77,12 @@ def _create_label_lookup(label_path):
 
 def _load_tf_model(checkpoint_file):
     # Placeholder
-    input_tensor = tf.placeholder(tf.float32, shape=(None, 224, 224, 3), name='input_image')
+    input_tensor = tf.compat.v1.placeholder(tf.float32, shape=(None, 224, 224, 3), name='input_image')
+
+    # Make the Tensorflow warnings go away
 
     # Load the model
-    sess = tf.Session()
+    sess = tf.compat.v1.Session()
     arg_scope = resnet_v1.resnet_arg_scope()
     with tf.contrib.slim.arg_scope(arg_scope):
         logits, _ = resnet_v1.resnet_v1_152(input_tensor, num_classes=1000, is_training=False, reuse=tf.AUTO_REUSE)
@@ -143,7 +150,7 @@ def get_model_api():
 
         results = {}
         for key, base64_img_string in images_dict.items():
-            print("\nRecognizing the image\n'{}' ...".format(key))
+            print("\nRecognizing the image (close the window using Ctrl-w)\n'{}' ...".format(key))
             rgb_image = _base64img_to_numpy(base64_img_string)
             batch_image = np.expand_dims(rgb_image, 0)
             results[key] = scoring_func(batch_image, number_results=_NUMBER_RESULTS)
