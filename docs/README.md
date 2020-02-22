@@ -7,7 +7,7 @@ tutorial](https://github.com/Microsoft/AKSDeploymentTutorialAML) by
 Yan Zhang, Mathew Salvaris, and Fidan Boylu Uz of Microsoft,
 demonstrates the pre-built
 [ResNet152](https://tfhub.dev/google/imagenet/resnet_v1_152/classification/1)
-model using TensorFlow and available from [tfhub](https://tfhub.dev)
+model using the open source TensorFlow and available from [tfhub](https://tfhub.dev)
 to identify the main object of a photo. Sample images are provided
 within the package and the demonstration applies the pre-built model
 to each image. This pre-built model has been trained to recognise
