@@ -130,7 +130,7 @@ def create_scoring_func(model_path=_MODEL_FILE, label_path=_LABEL_FILE):
     predict_for = _get_tf_model(model_path)
     end = t.default_timer()
 
-    load_time_msg = "    Model loading time: {0} ms".format(round((end - start) * 1000, 2))
+    load_time_msg = "    Model loading time: {0}s".format(int(end - start))
     print(load_time_msg)
 
     def call_model(image_array, number_results=_NUMBER_RESULTS):
