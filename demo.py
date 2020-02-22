@@ -1,6 +1,6 @@
 # Import required libraries.
 
-print("Loading the required Python modules for the ResNet152 model ...")
+print("Loading the required Python modules for the ResNet152 model ...\n")
 
 from objreg_utils import (
     img_url_to_json,
@@ -25,7 +25,7 @@ folder = mlhub.utils.get_package_dir()
 images = glob.glob(os.path.join("cache", "images", "*.jpg"))
 images.sort()
 
-print("\nThe ResNet152 model will be used for recognizing the images in\n'{}'".format(folder))
+print("\nThe ResNet152 model will be used for recognizing the images in\n'{}/cache/images/'".format(folder))
 print("\nPlease close each image (Ctrl-w) to proceed through the demonstration.")
 
 results = []
@@ -53,3 +53,5 @@ for image in images:
 # Plot the results together
 
 plot_predictions(images, results)
+
+print()
