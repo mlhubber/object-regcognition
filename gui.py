@@ -71,9 +71,18 @@ class MLHub(wx.Frame):
         panel.SetSizer(vbox)
 
     def ScaleBitmap(self, bitmap, width, height):
-        image = wx.ImageFromBitmap(bitmap)
+        image = bitmap.ConvertToImage()
+        # Retain the aspect ratio
+        w = image.GetWidth()
+        h = image.GetHeight()
+        oar = w/h # Original aspect ratio
+        par = width/height # Proposed aspect ratio
+        if oar > par:
+            height = width / oar
+        else:
+            width = height * oar
         image = image.Scale(width, height, wx.IMAGE_QUALITY_HIGH)
-        result = wx.BitmapFromImage(image)
+        result = wx.Bitmap(image)
         return(result)
 
     def OnBrowse(self, event):
@@ -91,6 +100,10 @@ class MLHub(wx.Frame):
                 sample = wx.Bitmap(paths[0], wx.BITMAP_TYPE_ANY)
                 sample = self.ScaleBitmap(sample, 450, 250)
                 self.sb_sample.SetBitmap(sample)
+                # Actually want to center it - calculate location.
+                # On a window resize it puts it to the middle
+                # Perhaps just need a redraw call.
+                self.sb_sample.SetPosition((100, 60))
 
 
     def OnIdentify(self, event):
