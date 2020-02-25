@@ -14,6 +14,8 @@ import subprocess
 
 MODEL = "Objects"
 
+DEFAULT_PATH = "Type a local path or a URL to an image (jpg, png, gif) file"
+
 WILDCARD = "Images (*.jpg)|*.jpg|" \
            "All files (*.*)|*.*"
 
@@ -37,7 +39,7 @@ class MLHub(wx.Frame):
         vbox = wx.BoxSizer(wx.VERTICAL)
 
         hbox1 = wx.BoxSizer(wx.HORIZONTAL)
-        self.tc_path = wx.TextCtrl(panel, value="Type a local path or a URL to an image (jpg, png, gif) file")
+        self.tc_path = wx.TextCtrl(panel, value=DEFAULT_PATH)
         hbox1.Add(self.tc_path, proportion=1)
         bt_browse = wx.Button(panel, label="Browse")
         bt_browse.Bind(wx.EVT_BUTTON, self.OnBrowse)
@@ -68,6 +70,12 @@ class MLHub(wx.Frame):
 
         panel.SetSizer(vbox)
 
+    def ScaleBitmap(self, bitmap, width, height):
+        image = wx.ImageFromBitmap(bitmap)
+        image = image.Scale(width, height, wx.IMAGE_QUALITY_HIGH)
+        result = wx.BitmapFromImage(image)
+        return(result)
+
     def OnBrowse(self, event):
         dlg = wx.FileDialog(self,
                             message="Choose a file",
@@ -81,12 +89,16 @@ class MLHub(wx.Frame):
             if len(paths):
                 self.tc_path.SetValue(paths[0])
                 sample = wx.Bitmap(paths[0], wx.BITMAP_TYPE_ANY)
+                sample = self.ScaleBitmap(sample, 450, 250)
                 self.sb_sample.SetBitmap(sample)
 
 
     def OnIdentify(self, event):
         wait = wx.BusyCursor()
-        results = subprocess.check_output(["ml", "identify", "objects", "cache/images/sample.jpg"])
+        path = self.tc_path.GetValue()
+        if path == DEFAULT_PATH:
+            path = "cache/images/sample.jpg"
+        results = subprocess.check_output(["ml", "identify", "objects", path])
         del(wait)
         r = results.decode("utf-8").split()[0].split(",")
         self.st_identity.SetLabel(f"Identified as a {r[1]} with a certainty of {r[0]}.")
