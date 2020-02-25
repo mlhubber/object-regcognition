@@ -9,6 +9,7 @@ website: mlhub.ai
 """
 
 import wx
+import subprocess
 
 MODEL = "Objects"
 
@@ -23,6 +24,8 @@ class MLHub(wx.Frame):
         self.Centre()
 
     def InitUI(self):
+        self.Bind(wx.EVT_CLOSE, self.OnClose)
+
         panel = wx.Panel(self)
 
         vbox = wx.BoxSizer(wx.VERTICAL)
@@ -48,6 +51,7 @@ class MLHub(wx.Frame):
 
         hbox3 = wx.BoxSizer(wx.HORIZONTAL)
         bt_identify = wx.Button(panel, label="Identify")
+        bt_identify.Bind(wx.EVT_BUTTON, self.OnIdentify)
         hbox3.Add(bt_identify, flag=wx.RIGHT, border=10)
         st_identity = wx.StaticText(panel, label="Identified as a ...")
         hbox3.Add(st_identity, flag=wx.LEFT | wx.RIGHT | wx.ALIGN_CENTER_VERTICAL)
@@ -56,6 +60,19 @@ class MLHub(wx.Frame):
         vbox.Add((-1, 10))
 
         panel.SetSizer(vbox)
+
+    def OnIdentify(self, event):
+        subprocess.run(["ml", "identify", "objects", "cache/images/sample.jpg"])
+
+
+    def OnClose(self, event):
+        dlg = wx.MessageDialog(self, 
+                               "Do you really want to close this application?",
+                               "Confirm Exit", wx.OK|wx.CANCEL|wx.ICON_QUESTION)
+        result = dlg.ShowModal()
+        dlg.Destroy()
+        if result == wx.ID_OK:
+            self.Destroy()
         
 def main():
     app = wx.App()
