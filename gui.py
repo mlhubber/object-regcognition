@@ -117,6 +117,9 @@ class MLHub(wx.Frame):
         certainty = r[0]
         identified = " or".join(r[1:len(r)])
         self.st_identity.SetLabel(f"{identified} [{certainty}]")
+	# Show all identifications on the command line.
+        print(path)
+        print(results.decode("utf-8"))
 
     def OnClose(self, event):
         dlg = wx.MessageDialog(self, 
