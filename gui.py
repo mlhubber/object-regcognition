@@ -8,10 +8,14 @@ author: Graham Williams
 website: mlhub.ai
 """
 
+import os
 import wx
 import subprocess
 
 MODEL = "Objects"
+
+WILDCARD = "Images (*.jpg)|*.jpg|" \
+           "All files (*.*)|*.*"
 
 class MLHub(wx.Frame):
 
@@ -26,14 +30,17 @@ class MLHub(wx.Frame):
     def InitUI(self):
         self.Bind(wx.EVT_CLOSE, self.OnClose)
 
+        self.images_dir = os.path.join(os.getcwd(), "cache/images")
+        
         panel = wx.Panel(self)
 
         vbox = wx.BoxSizer(wx.VERTICAL)
 
         hbox1 = wx.BoxSizer(wx.HORIZONTAL)
-        tc1 = wx.TextCtrl(panel, value="Type a local path or a URL to an image (jpg, png, gif) file")
-        hbox1.Add(tc1, proportion=1)
+        self.tc_path = wx.TextCtrl(panel, value="Type a local path or a URL to an image (jpg, png, gif) file")
+        hbox1.Add(self.tc_path, proportion=1)
         bt_browse = wx.Button(panel, label="Browse")
+        bt_browse.Bind(wx.EVT_BUTTON, self.OnBrowse)
         hbox1.Add(bt_browse, flag=wx.LEFT, border=10)
         bt_display = wx.Button(panel, label='Display')
         hbox1.Add(bt_display, flag=wx.LEFT, border=10)
@@ -43,8 +50,8 @@ class MLHub(wx.Frame):
 
         hbox2 = wx.BoxSizer(wx.HORIZONTAL)
         sample = wx.Bitmap("cache/images/sample.jpg", wx.BITMAP_TYPE_ANY)
-        sb_sample = wx.StaticBitmap(panel, wx.ID_ANY, sample)
-        hbox2.Add(sb_sample, proportion=1, flag=wx.EXPAND)
+        self.sb_sample = wx.StaticBitmap(panel, wx.ID_ANY, sample)
+        hbox2.Add(self.sb_sample, proportion=1, flag=wx.EXPAND)
         vbox.Add(hbox2, proportion=1, flag=wx.LEFT|wx.RIGHT|wx.EXPAND, border=10)
 
         vbox.Add((-1, 10))
@@ -53,21 +60,40 @@ class MLHub(wx.Frame):
         bt_identify = wx.Button(panel, label="Identify")
         bt_identify.Bind(wx.EVT_BUTTON, self.OnIdentify)
         hbox3.Add(bt_identify, flag=wx.RIGHT, border=10)
-        st_identity = wx.StaticText(panel, label="Identified as a ...")
-        hbox3.Add(st_identity, flag=wx.LEFT | wx.RIGHT | wx.ALIGN_CENTER_VERTICAL)
+        self.st_identity = wx.StaticText(panel, label="Identified as a ...")
+        hbox3.Add(self.st_identity, flag=wx.LEFT | wx.RIGHT | wx.ALIGN_CENTER_VERTICAL)
         vbox.Add(hbox3, flag=wx.EXPAND | wx.LEFT | wx.RIGHT | wx.TOP, border=10)
 
         vbox.Add((-1, 10))
 
         panel.SetSizer(vbox)
 
-    def OnIdentify(self, event):
-        subprocess.run(["ml", "identify", "objects", "cache/images/sample.jpg"])
+    def OnBrowse(self, event):
+        dlg = wx.FileDialog(self,
+                            message="Choose a file",
+                            defaultDir=self.images_dir, 
+                            defaultFile="",
+                            wildcard=WILDCARD,
+                            style=wx.FD_OPEN | wx.FD_MULTIPLE | wx.FD_CHANGE_DIR
+        )
+        if dlg.ShowModal() == wx.ID_OK:
+            paths = dlg.GetPaths()
+            if len(paths):
+                self.tc_path.SetValue(paths[0])
+                sample = wx.Bitmap(paths[0], wx.BITMAP_TYPE_ANY)
+                self.sb_sample.SetBitmap(sample)
 
+
+    def OnIdentify(self, event):
+        wait = wx.BusyCursor()
+        results = subprocess.check_output(["ml", "identify", "objects", "cache/images/sample.jpg"])
+        del(wait)
+        r = results.decode("utf-8").split()[0].split(",")
+        self.st_identity.SetLabel(f"Identified as a {r[1]} with a certainty of {r[0]}.")
 
     def OnClose(self, event):
         dlg = wx.MessageDialog(self, 
-                               "Do you really want to close this application?",
+                               "Do you really want to close MLHub " + MODEL +"?",
                                "Confirm Exit", wx.OK|wx.CANCEL|wx.ICON_QUESTION)
         result = dlg.ShowModal()
         dlg.Destroy()
