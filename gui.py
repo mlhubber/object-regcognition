@@ -15,6 +15,7 @@ import subprocess
 MODEL = "Objects"
 
 DEFAULT_PATH = "Enter a local path to an image (jpg, png) file"
+DEFAULT_ID   = "Identified as ..."
 
 WILDCARD = "Images (*.jpg,*.png)|*.jpg;*.png|" \
            "All files (*.*)|*.*"
@@ -24,13 +25,13 @@ class MLHub(wx.Frame):
     def __init__(self, parent, title):
         super(MLHub, self).__init__(parent,
                                     title=title,
-                                    size=(650, 400))
+                                    size=(750, 500))
 
         self.InitUI()
         self.Centre()
 
     def InitUI(self):
-        self.Bind(wx.EVT_CLOSE, self.OnClose)
+        # self.Bind(wx.EVT_CLOSE, self.OnClose)
 
         self.images_dir = os.path.join(os.getcwd(), "cache/images")
         
@@ -60,7 +61,7 @@ class MLHub(wx.Frame):
         bt_identify = wx.Button(panel, label="Identify")
         bt_identify.Bind(wx.EVT_BUTTON, self.OnIdentify)
         hbox3.Add(bt_identify, flag=wx.RIGHT, border=10)
-        self.st_identity = wx.StaticText(panel, label="Identified as a ...")
+        self.st_identity = wx.StaticText(panel, label=DEFAULT_ID)
         hbox3.Add(self.st_identity, flag=wx.LEFT | wx.RIGHT | wx.ALIGN_CENTER_VERTICAL)
         vbox.Add(hbox3, flag=wx.EXPAND | wx.LEFT | wx.RIGHT | wx.TOP, border=10)
 
@@ -94,10 +95,14 @@ class MLHub(wx.Frame):
         if dlg.ShowModal() == wx.ID_OK:
             paths = dlg.GetPaths()
             if len(paths):
+                # Display path in text control.
                 self.tc_path.SetValue(paths[0])
+                # Update the image display.
                 sample = wx.Bitmap(paths[0], wx.BITMAP_TYPE_ANY)
-                sample = self.ScaleBitmap(sample, 450, 250)
+                sample = self.ScaleBitmap(sample, 500, 300)
                 self.sb_sample.SetBitmap(sample)
+                # Update the Identification text.
+                self.st_identity.SetLabel(DEFAULT_ID)
                 # Recenter the image
                 self.hbox2.Layout()
 
@@ -108,8 +113,10 @@ class MLHub(wx.Frame):
             path = "cache/images/sample.jpg"
         results = subprocess.check_output(["ml", "identify", "objects", path])
         del(wait)
-        r = results.decode("utf-8").split()[0].split(",")
-        self.st_identity.SetLabel(f"Identified as a {r[1]} with a certainty of {r[0]}.")
+        r = results.decode("utf-8").split("\n")[0].split(",")
+        certainty = r[0]
+        identified = " or".join(r[1:len(r)])
+        self.st_identity.SetLabel(f"{identified} [{certainty}]")
 
     def OnClose(self, event):
         dlg = wx.MessageDialog(self, 
