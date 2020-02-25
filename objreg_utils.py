@@ -162,7 +162,7 @@ def get_model_api():
         if False: print("    Predictions:")
         for l, p in results[key]:
             if False: print("      {0:>5.2f}%: {1}".format(p * 100, ' '.join(l.split()[1:])))
-            print(f"{results[p:.2},{' '.join(l.split()[1:])}")
+            print(f"{p:.2},{' '.join(l.split()[1:])}")
 
         return results, timemsg
 
