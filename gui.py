@@ -50,11 +50,11 @@ class MLHub(wx.Frame):
 
         vbox.Add((-1, 10))
 
-        hbox2 = wx.BoxSizer(wx.HORIZONTAL)
+        self.hbox2 = wx.BoxSizer(wx.HORIZONTAL)
         sample = wx.Bitmap("cache/images/sample.jpg", wx.BITMAP_TYPE_ANY)
         self.sb_sample = wx.StaticBitmap(panel, wx.ID_ANY, sample)
-        hbox2.Add(self.sb_sample, proportion=1, flag=wx.EXPAND)
-        vbox.Add(hbox2, proportion=1, flag=wx.LEFT|wx.RIGHT|wx.EXPAND, border=10)
+        self.hbox2.Add(self.sb_sample, proportion=1, flag=wx.EXPAND)
+        vbox.Add(self.hbox2, proportion=1, flag=wx.LEFT|wx.RIGHT|wx.EXPAND, border=10)
 
         vbox.Add((-1, 10))
 
@@ -100,11 +100,8 @@ class MLHub(wx.Frame):
                 sample = wx.Bitmap(paths[0], wx.BITMAP_TYPE_ANY)
                 sample = self.ScaleBitmap(sample, 450, 250)
                 self.sb_sample.SetBitmap(sample)
-                # Actually want to center it - calculate location.
-                # On a window resize it puts it to the middle
-                # Perhaps just need a redraw call.
-                self.sb_sample.SetPosition((100, 60))
-
+                # Recenter the image
+                self.hbox2.Layout()
 
     def OnIdentify(self, event):
         wait = wx.BusyCursor()
