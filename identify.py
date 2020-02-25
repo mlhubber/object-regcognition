@@ -52,7 +52,8 @@ def _score_for_one_img(img, label='image'):
 
     json_lod = json.loads(jsonimg)
     output = predict_for(json_lod)
-    plot_single_prediction(img, output)
+    # Want --plot from CLI
+    if False: plot_single_prediction(img, output)
     return output
 
 
