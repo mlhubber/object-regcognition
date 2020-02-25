@@ -124,14 +124,14 @@ def _base64img_to_numpy(base64_img_string):
 
 
 def create_scoring_func(model_path=_MODEL_FILE, label_path=_LABEL_FILE):
-    print("\nLoading the pre-trained ResNet v1 152 model with 1000 classes ...")
+    if False: print("\nLoading the pre-trained ResNet v1 152 model with 1000 classes ...")
     start = t.default_timer()
     labels_for = _create_label_lookup(label_path)
     predict_for = _get_tf_model(model_path)
     end = t.default_timer()
 
     load_time_msg = "\nModel loading time: {0}s".format(int(end - start))
-    print(load_time_msg)
+    if False: print(load_time_msg)
 
     def call_model(image_array, number_results=_NUMBER_RESULTS):
         pred_proba = predict_for(image_array).squeeze()
@@ -150,7 +150,7 @@ def get_model_api():
 
         results = {}
         for key, base64_img_string in images_dict.items():
-            print("\nRecognizing the image (close the window using Ctrl-w)\n'{}' ...".format(key))
+            if False: print("\nRecognizing the image (close the window using Ctrl-w)\n'{}' ...".format(key))
             rgb_image = _base64img_to_numpy(base64_img_string)
             batch_image = np.expand_dims(rgb_image, 0)
             results[key] = scoring_func(batch_image, number_results=_NUMBER_RESULTS)
@@ -158,10 +158,11 @@ def get_model_api():
         end = t.default_timer()
 
         timemsg = 'Computed in {0} ms'.format(round((end - start) * 1000, 2))
-        print("    {}".format(timemsg))
-        print("    Predictions:")
+        if False: print("    {}".format(timemsg))
+        if False: print("    Predictions:")
         for l, p in results[key]:
-            print("      {0:>5.2f}%: {1}".format(p * 100, ' '.join(l.split()[1:])))
+            if False: print("      {0:>5.2f}%: {1}".format(p * 100, ' '.join(l.split()[1:])))
+            print(f"{results[p:.2},{' '.join(l.split()[1:])}")
 
         return results, timemsg
 

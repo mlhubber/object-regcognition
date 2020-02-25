@@ -1,6 +1,18 @@
-# Import required libraries.
+# -*- coding: utf-8 -*-
 
-print("Loading the required Python modules for the ResNet152 model ...\n")
+# Copyright (c) Graham.Williams@Togaware. All rights reserved.
+# Licensed under the MIT License.
+# Author: Graham.Williams@togaware.com
+#
+# A command line script to identify the main object of the image.
+#
+# ml identify objects <path>
+
+# ----------------------------------------------------------------------
+# Setup
+# ----------------------------------------------------------------------
+
+# Import the required libraries.
 
 from objreg_utils import (
     img_url_to_json,
@@ -19,6 +31,7 @@ from mlhub import utils as mlutils
 import socket
 
 # The working dir of the command which invokes this script.
+
 CMD_CWD = mlutils.get_cmd_cwd()
 
 # Utilities
