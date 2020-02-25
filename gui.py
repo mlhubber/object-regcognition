@@ -14,9 +14,9 @@ import subprocess
 
 MODEL = "Objects"
 
-DEFAULT_PATH = "Type a local path or a URL to an image (jpg, png, gif) file"
+DEFAULT_PATH = "Enter a local path to an image (jpg, png) file"
 
-WILDCARD = "Images (*.jpg)|*.jpg|" \
+WILDCARD = "Images (*.jpg,*.png)|*.jpg;*.png|" \
            "All files (*.*)|*.*"
 
 class MLHub(wx.Frame):
@@ -44,8 +44,6 @@ class MLHub(wx.Frame):
         bt_browse = wx.Button(panel, label="Browse")
         bt_browse.Bind(wx.EVT_BUTTON, self.OnBrowse)
         hbox1.Add(bt_browse, flag=wx.LEFT, border=10)
-        bt_display = wx.Button(panel, label='Display')
-        hbox1.Add(bt_display, flag=wx.LEFT, border=10)
         vbox.Add(hbox1, flag=wx.EXPAND|wx.LEFT|wx.RIGHT|wx.TOP, border=10)
 
         vbox.Add((-1, 10))
