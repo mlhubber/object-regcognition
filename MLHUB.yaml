@@ -34,6 +34,7 @@ dependencies:
     - demo.py
     - objreg_utils.py
     - docs/README.md: README.md
+    - gui.py
     - identify.py
 commands:
   demo     : Run the model on sample images.
