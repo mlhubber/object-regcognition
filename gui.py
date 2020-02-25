@@ -39,7 +39,7 @@ class MLHub(wx.Frame):
         vbox.Add((-1, 10))
 
         hbox2 = wx.BoxSizer(wx.HORIZONTAL)
-        sample = wx.Bitmap("sample01.jpg", wx.BITMAP_TYPE_ANY)
+        sample = wx.Bitmap("images/sample.jpg", wx.BITMAP_TYPE_ANY)
         sb_sample = wx.StaticBitmap(panel, wx.ID_ANY, sample)
         hbox2.Add(sb_sample, proportion=1, flag=wx.EXPAND)
         vbox.Add(hbox2, proportion=1, flag=wx.LEFT|wx.RIGHT|wx.EXPAND, border=10)
