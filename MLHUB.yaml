@@ -30,6 +30,7 @@ dependencies:
     - https://upload.wikimedia.org/wikipedia/commons/3/35/Saltwater_crocodile.jpg: cache/images/croc.jpg
     - https://cdn.arstechnica.net/wp-content/uploads/2012/04/bohol_tarsier_wiki-4f88309-intro.jpg: cache/images/tarsier.jpg
     - http://i.telegraph.co.uk/multimedia/archive/03233/BIRDS-ROBIN_3233998b.jpg: cache/images/robin.jpg
+    - https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Aciagrion_occidentale-Kadavoor-2017-05-08-002.jpg/440px-Aciagrion_occidentale-Kadavoor-2017-05-08-002.jpg: cache/images/sample.jpg
     - demo.py
     - objreg_utils.py
     - docs/README.md: README.md
