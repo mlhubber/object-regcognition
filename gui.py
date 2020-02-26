@@ -13,6 +13,7 @@ import wx
 import subprocess
 
 MODEL = "Objects"
+CMD = ["ml", "identify", "objects"]
 
 DEFAULT_PATH = "Enter a local path to an image (jpg, png) file"
 DEFAULT_ID   = "Identified as ..."
@@ -110,15 +111,17 @@ class MLHub(wx.Frame):
         wait = wx.BusyCursor()
         path = self.tc_path.GetValue()
         if path == DEFAULT_PATH:
-            path = "cache/images/sample.jpg"
-        results = subprocess.check_output(["ml", "identify", "objects", path])
+            path = os.path.join(self.images_dir, "sample.jpg")
+        cmd = CMD.copy()
+        cmd.append(path)
+        print("$ " + " ".join(cmd))
+        results = subprocess.check_output(cmd)
         del(wait)
         r = results.decode("utf-8").split("\n")[0].split(",")
         certainty = r[0]
         identified = " or".join(r[1:len(r)])
         self.st_identity.SetLabel(f"{identified} [{certainty}]")
 	# Show all identifications on the command line.
-        print(path)
         print(results.decode("utf-8"))
 
     def OnClose(self, event):
