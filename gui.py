@@ -14,7 +14,7 @@ import subprocess
 import re
 
 MODEL = "Objects"
-CMD = ["ml", "identify", "objects"]
+CMD = "ml identify objects"
 
 DEFAULT_PATH = "Enter a local path to an image (jpg, png) file"
 DEFAULT_IMAGE = os.path.join(os.getcwd(), "cache/images/sample.jpg")
