@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-A GUI for MLHub from the Objects model
+A MLHub GUI for Objects
 
 author: Graham Williams
 website: mlhub.ai
@@ -11,12 +11,14 @@ website: mlhub.ai
 import os
 import wx
 import subprocess
+import re
 
 MODEL = "Objects"
 CMD = ["ml", "identify", "objects"]
 
 DEFAULT_PATH = "Enter a local path to an image (jpg, png) file"
-DEFAULT_ID   = "Identified as ..."
+DEFAULT_IMAGE = os.path.join(os.getcwd(), "cache/images/sample.jpg")
+DEFAULT_ID = "Identified as ..."
 
 WILDCARD = "Images (*.jpg,*.png)|*.jpg;*.png|" \
            "All files (*.*)|*.*"
@@ -51,7 +53,7 @@ class MLHub(wx.Frame):
         vbox.Add((-1, 10))
 
         self.hbox2 = wx.BoxSizer(wx.HORIZONTAL)
-        sample = wx.Bitmap("cache/images/sample.jpg", wx.BITMAP_TYPE_ANY)
+        sample = wx.Bitmap(DEFAULT_IMAGE, wx.BITMAP_TYPE_ANY)
         self.sb_sample = wx.StaticBitmap(panel, wx.ID_ANY, sample)
         self.hbox2.Add(self.sb_sample, proportion=1, flag=wx.EXPAND)
         vbox.Add(self.hbox2, proportion=1, flag=wx.LEFT|wx.RIGHT|wx.EXPAND, border=10)
@@ -111,9 +113,10 @@ class MLHub(wx.Frame):
         wait = wx.BusyCursor()
         path = self.tc_path.GetValue()
         if path == DEFAULT_PATH:
-            path = os.path.join(self.images_dir, "sample.jpg")
+            path = DEFAULT_IMAGE
         cmd = CMD.copy()
         cmd.append(path)
+	# Show the command line.
         print("$ " + " ".join(cmd))
         results = subprocess.check_output(cmd)
         del(wait)
@@ -121,7 +124,7 @@ class MLHub(wx.Frame):
         certainty = r[0]
         identified = " or".join(r[1:len(r)])
         self.st_identity.SetLabel(f"{identified} [{certainty}]")
-	# Show all identifications on the command line.
+	# Show the command line results.
         print(results.decode("utf-8"))
 
     def OnClose(self, event):
