@@ -20,7 +20,7 @@ dependencies:
   pip3:
     - Pillow
     - tensorflow
-    - numpy==1.14.5
+    - numpy>=1.14.5
   files:
     - http://download.tensorflow.org/models/resnet_v1_152_2016_08_28.tar.gz: cache/resources/
     - http://mlhub.ai/cache/data.dmlc.ml/mxnet/models/imagenet/synset.txt: cache/resources/
