@@ -16,7 +16,6 @@ dependencies:
     - ipython # python3-ipython not available Ubuntu 16.04
     - toolz # python3-toolz not available Ubuntu 16.04
     - keras # python3-keras not available Ubuntu 16.04
-    - wxgtk4.0 # Should be a ml configure dependency
   pip3:
     - Pillow
     - tensorflow==1.14.0
