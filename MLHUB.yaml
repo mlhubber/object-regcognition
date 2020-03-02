@@ -38,10 +38,8 @@ dependencies:
     - identify.py
 commands:
   demo     : Run the model on sample images.
-  gui      : Run a GUI for the model.
+  gui      : A graphical front-end for the model.
   identify :
     description: Identify objects in supplied images.
-    required:
+    optional:
       image: Path or URL to images.
-tested:
-  - 20200220 ubuntu1910 success
