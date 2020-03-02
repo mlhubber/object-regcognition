@@ -4,9 +4,9 @@
 # Licensed under the MIT License.
 # Author: Graham.Williams@togaware.com
 #
-# A command line script to identify the main object of the image.
+# A command line script to identify the main object of an image.
 #
-# ml identify objects <path>
+# ml identify objects [<path>]
 
 # ----------------------------------------------------------------------
 # Setup
