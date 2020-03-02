@@ -36,6 +36,7 @@ results = []
 for image in images:
     jsonimg = img_url_to_json(image, label=os.path.join(folder, image))
     json_lod = json.loads(jsonimg)
+    print(f"\nImage path: {image}")
     output = predict_for(json_lod)
 
     # Plot the result
