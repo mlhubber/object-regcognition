@@ -1,10 +1,16 @@
+# Remove all logging/warning information of tensorflow from the output.
+
 import warnings
+import os
+import logging
+
 warnings.simplefilter("ignore", category=FutureWarning)
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # FATAL
+logging.getLogger('tensorflow').setLevel(logging.FATAL)
 
 import base64
 import json
 import urllib
-import os
 import timeit as t
 from io import BytesIO
 
@@ -19,11 +25,6 @@ from PIL import Image, ImageOps
 import random
 import re
 import glob
-
-# Remove all logging information of tensorflow from the output.
-import logging
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # FATAL
-logging.getLogger('tensorflow').setLevel(logging.FATAL)
 
 from keras.layers import Input
 from keras.layers import Dense
