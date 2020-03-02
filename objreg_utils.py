@@ -1,3 +1,6 @@
+import warnings
+warnings.simplefilter("ignore", category=FutureWarning)
+
 import base64
 import json
 import urllib
