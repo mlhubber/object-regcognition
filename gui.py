@@ -37,6 +37,7 @@ class MLHub(wx.Frame):
         # self.Bind(wx.EVT_CLOSE, self.OnClose)
 
         self.images_dir = os.path.join(os.getcwd(), "cache/images")
+        self.last_browse_dir = ""
         
         panel = wx.Panel(self)
 
@@ -64,8 +65,8 @@ class MLHub(wx.Frame):
         bt_identify = wx.Button(panel, label="Identify")
         bt_identify.Bind(wx.EVT_BUTTON, self.OnIdentify)
         hbox3.Add(bt_identify, flag=wx.RIGHT, border=10)
-        self.st_identity = wx.StaticText(panel, label=DEFAULT_ID)
-        hbox3.Add(self.st_identity, flag=wx.LEFT | wx.RIGHT | wx.ALIGN_CENTER_VERTICAL)
+        self.st_results = wx.StaticText(panel, label=DEFAULT_ID)
+        hbox3.Add(self.st_results, flag=wx.LEFT | wx.RIGHT | wx.ALIGN_CENTER_VERTICAL)
         vbox.Add(hbox3, flag=wx.EXPAND | wx.LEFT | wx.RIGHT | wx.TOP, border=10)
 
         vbox.Add((-1, 10))
@@ -88,9 +89,13 @@ class MLHub(wx.Frame):
         return(result)
 
     def OnBrowse(self, event):
+        if self.last_browse_dir == "":
+            default_dir = self.images_dir
+        else:
+            default_dir = self.last_browse_dir
         dlg = wx.FileDialog(self,
                             message="Choose a file",
-                            defaultDir=self.images_dir, 
+                            defaultDir=default_dir, 
                             defaultFile="",
                             wildcard=WILDCARD,
                             style=wx.FD_OPEN | wx.FD_MULTIPLE | wx.FD_CHANGE_DIR
@@ -98,6 +103,7 @@ class MLHub(wx.Frame):
         if dlg.ShowModal() == wx.ID_OK:
             paths = dlg.GetPaths()
             if len(paths):
+                self.last_browse_dir = os.path.dirname(paths[0])
                 # Display path in text control.
                 self.tc_path.SetValue(paths[0])
                 # Update the image display.
@@ -105,7 +111,7 @@ class MLHub(wx.Frame):
                 sample = self.ScaleBitmap(sample, 500, 300)
                 self.sb_sample.SetBitmap(sample)
                 # Update the Identification text.
-                self.st_identity.SetLabel(DEFAULT_ID)
+                self.st_results.SetLabel(DEFAULT_ID)
                 # Recenter the image
                 self.hbox2.Layout()
 
@@ -123,7 +129,7 @@ class MLHub(wx.Frame):
         r = results.decode("utf-8").split("\n")[0].split(",")
         certainty = r[0]
         identified = " or".join(r[1:len(r)])
-        self.st_identity.SetLabel(f"{identified} [{certainty}]")
+        self.st_results.SetLabel(f"{identified} [{certainty}]")
 	# Show the command line results.
         print(results.decode("utf-8"))
 
