@@ -14,11 +14,13 @@ import subprocess
 import re
 
 MODEL = "Objects"
-CMD = ["ml", "identify", "objects"]
+CMD_IDENTIFY = ["ml", "identify", "objects"]
 
 DEFAULT_PATH = "Enter a local path to an image (jpg, png) file"
 DEFAULT_IMAGE = os.path.join(os.getcwd(), "cache/images/sample.jpg")
-DEFAULT_ID = "Identified as ..."
+DEFAULT_ID = "Results will appear here ..."
+
+NO_RESULTS = "No results returned from the model."
 
 WILDCARD = "Images (*.jpg,*.png)|*.jpg;*.png|" \
            "All files (*.*)|*.*"
@@ -55,18 +57,22 @@ class MLHub(wx.Frame):
 
         self.hbox2 = wx.BoxSizer(wx.HORIZONTAL)
         sample = wx.Bitmap(DEFAULT_IMAGE, wx.BITMAP_TYPE_ANY)
+        sample = self.ScaleBitmap(sample, 500, 300)
         self.sb_sample = wx.StaticBitmap(panel, wx.ID_ANY, sample)
-        self.hbox2.Add(self.sb_sample, proportion=1, flag=wx.EXPAND)
+        self.hbox2.Add(self.sb_sample, flag=wx.EXPAND)
+        self.hbox2.Add((10, -1))
+        self.st_results = wx.StaticText(panel, label=DEFAULT_ID)
+        self.hbox2.Add(self.st_results, flag=wx.LEFT | wx.RIGHT | wx.ALIGN_CENTER_VERTICAL)
         vbox.Add(self.hbox2, proportion=1, flag=wx.LEFT|wx.RIGHT|wx.EXPAND, border=10)
 
         vbox.Add((-1, 10))
 
         hbox3 = wx.BoxSizer(wx.HORIZONTAL)
+	# IDENTIFY
         bt_identify = wx.Button(panel, label="Identify")
         bt_identify.Bind(wx.EVT_BUTTON, self.OnIdentify)
         hbox3.Add(bt_identify, flag=wx.RIGHT, border=10)
-        self.st_results = wx.StaticText(panel, label=DEFAULT_ID)
-        hbox3.Add(self.st_results, flag=wx.LEFT | wx.RIGHT | wx.ALIGN_CENTER_VERTICAL)
+	# Add to the panel.
         vbox.Add(hbox3, flag=wx.EXPAND | wx.LEFT | wx.RIGHT | wx.TOP, border=10)
 
         vbox.Add((-1, 10))
@@ -120,18 +126,22 @@ class MLHub(wx.Frame):
         path = self.tc_path.GetValue()
         if path == DEFAULT_PATH:
             path = DEFAULT_IMAGE
-        cmd = CMD.copy()
+        cmd = CMD_IDENTIFY.copy()
         cmd.append(path)
 	# Show the command line.
         print("$ " + " ".join(cmd))
         results = subprocess.check_output(cmd)
-        del(wait)
-        r = results.decode("utf-8").split("\n")[0].split(",")
-        certainty = r[0]
-        identified = " or".join(r[1:len(r)])
-        self.st_results.SetLabel(f"{identified} [{certainty}]")
+        if len(results) == 0:
+            self.st_results.SetLabel(NO_RESULTS)
+        else:
+            r = re.sub(r'^(.*?),', r'[\1] ',
+                       re.sub(r'\n(.*?),', r'\n\n[\1] ',
+                              results.decode("utf-8")))
+            self.st_results.SetLabel(r)
+        self.hbox2.Layout()
 	# Show the command line results.
         print(results.decode("utf-8"))
+        del(wait)
 
     def OnClose(self, event):
         dlg = wx.MessageDialog(self, 
