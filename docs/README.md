@@ -23,6 +23,7 @@ Visit the github repository for the examples and code:
 
 ```console
 ml demo objects
+ml gui objects
 ml identify objects https://g3n1u5.com/mlhub/ryleybench.png
 ml identify objects https://g3n1u5.com/mlhub/slide.png
 ml identify objects https://g3n1u5.com/mlhub/parkedcars.png
