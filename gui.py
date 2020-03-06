@@ -134,9 +134,10 @@ class MLHub(wx.Frame):
         if len(results) == 0:
             self.st_results.SetLabel(NO_RESULTS)
         else:
-            r = re.sub(r'^(.*?),', r'[\1] ',
-                       re.sub(r'\n(.*?),', r'\n\n[\1] ',
-                              results.decode("utf-8")))
+            r = re.sub(",", "\n",
+                       re.sub(r'^(.*?),', r'[\1] ',
+                              re.sub(r'\n(.*?),', r'\n\n[\1] ',
+                                     results.decode("utf-8"))))
             self.st_results.SetLabel(r)
         self.hbox2.Layout()
 	# Show the command line results.
