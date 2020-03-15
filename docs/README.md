@@ -16,10 +16,11 @@ classes/objects](http://mlhub.ai/cache/data.dmlc.ml/mxnet/models/imagenet/synset
 These include goldfish, great white shark, tiger shark, sports car,
 etc.
 
-Visit the github repository for the examples and code:
+Visit the github repository for further examples and code:
 <https://github.com/mlhubber/objects>
 
-## Quick Start Command Line Examples
+Quick Start Command Line Examples
+---------------------------------
 
 ```console
 ml demo objects
@@ -33,17 +34,23 @@ ml identify objects https://g3n1u5.com/mlhub/pond.png
 Usage
 -----
 
-- To install mlhub 
+- To install mlhub (Ubuntu 18.04 LTS)
 
-        $ pip3 install mlhub
+```console
+$ pip3 install mlhub
+$ ml configure
+```
 
 - To install and run the pre-built model:
 
-        $ ml install   objects
-        $ ml readme    objects
-        $ ml configure objects
-        $ ml demo      objects
-        $ ml identify  objects
+```console
+$ ml install   objects
+$ ml configure objects
+$ ml readme    objects
+$ ml commands  objects
+$ ml demo      objects
+$ ml identify  objects
+```
 
 Examples
 --------
@@ -64,3 +71,15 @@ Examples
 - To interactively provide images without repeatedly reloading the model:
 
         $ ml identify objects
+
+Further Examples
+----------------
+
+```console
+ml ocr azcv https://access.togaware.com/letter_tony_01.png
+ml ocr azcv https://access.togaware.com/poem_tony.png
+ml landmarks azcv https://access.togaware.com/hb1.png
+ml landmarks azcv https://access.togaware.com/hb2.png
+ml landmarks azcv https://access.togaware.com/soh1.png
+ml landmarks azcv https://access.togaware.com/soh2.png
+```
